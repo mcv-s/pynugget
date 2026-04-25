@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+
+
+
+
+
+<meta charset="UTF-8" />
+<title>Python Editor + Stage + Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/neo.min.css"/>
+<link rel="stylesheet" href="editor.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+</head>
+<body>
+<header>
+  <div class="title-area">
+    <input type="text" id="projectTitle" class="project-title" value="Untitled-Project-1" />
+    <button id="uploadBtn" class="icon-btn" title="Upload Python file">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#e5e7eb" viewBox="0 0 256 256">
+        <path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0ZM93.66,77.66,120,51.31V144a8,8,0,0,0,16,0V51.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,77.66Z"></path>
+      </svg>
+    </button>
+    <button id="downloadBtn" class="icon-btn" title="Download Python file">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#e5e7eb" viewBox="0 0 256 256">
+        <path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"></path>
+      </svg>
+    </button>
+    <button id="resetBtn" class="icon-btn" title="Create New Project">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#e5e7eb" viewBox="0 0 256 256">
+        <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
+      </svg>
+    </button>
+    <button id="linkBtn" class="icon-btn" title="Copy Share Link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0,0,30.07395,27.08077"><g transform="translate(-120.95819,-62.465)"><g stroke="none" stroke-width="0.2" stroke-miterlimit="1">
+          <path d="M148.66665,76.38329l-4.78479,4.78393c-1.51889,1.52848 -3.61651,2.38728 -5.77133,2.38132c-3.38364,-0.00441 -6.44314,-2.13029 -7.6319,-5.29823c-0.28995,-0.77665 0.10195,-1.64744 0.8786,-1.93739c0.77665,-0.28995 1.73195,0.06329 2.0219,0.83994c0.74934,1.99196 2.62399,3.29142 4.75221,3.29988c1.35938,0.00392 2.63902,-0.53825 3.5977,-1.50203l4.72206,-4.71806c1.86853,-1.86859 2.02117,-4.80751 0.33649,-6.84341c-1.68468,-2.0359 -4.5995,-2.44039 -6.78475,-0.95454c-0.4418,0.33038 -1.01823,0.38911 -1.51864,0.15691c-0.50041,-0.2322 -0.86802,-0.81397 -0.90099,-1.36464c-0.03296,-0.55067 0.24489,-1.07695 0.71403,-1.3672c3.46406,-2.3488 8.19573,-1.66596 10.8648,1.55779c2.66907,3.22375 2.46042,8.0008 -0.49353,10.96572z" fill="#e5e7eb"/>
+          <path d="M133.70653,88.14022c-3.46379,2.36096 -8.20541,1.68252 -10.8787,-1.54632c-2.67329,-3.22885 -2.45843,-8.01484 0.50742,-10.97723l4.78479,-4.7839c3.17302,-3.16721 8.36524,-3.15551 11.53826,0.01171c0.82337,0.81844 1.4685,1.8175 1.87431,2.90521c0.28995,0.77665 -0.10196,1.64742 -0.87861,1.93738c-0.77665,0.28995 -1.73194,-0.06327 -2.02189,-0.83992c-0.61252,-1.62997 -1.98956,-2.81723 -3.69139,-3.18564c-1.70183,-0.36841 -3.44356,0.15707 -4.67535,1.38778l-4.71649,4.71812c-1.86853,1.86859 -2.02112,4.80748 -0.33644,6.84338c1.68468,2.0359 4.59947,2.44036 6.78472,0.95451c0.4418,-0.33038 1.01822,-0.3891 1.51863,-0.1569c0.50041,0.2322 0.86804,0.81396 0.90101,1.36464c0.03296,0.55067 -0.24489,1.07695 -0.71403,1.3672z" fill="#e5e7eb"/></g></g>
+      </svg>
+    </button>
+    <a href="https://python.w8.quuq.dev/documentation" target="_blank">
+      <button id="documentBtn" class="icon-btn" title="Documentation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#f0f0f0" viewBox="0 0 256 256"><path d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"></path></svg>      </button>
+    </a>
+    <a href="https://python.w8.quuq.dev/nuggets" target="_blank">
+      <button id="documentBtn" class="icon-btn" title="Documentation">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#f0f0f0" viewBox="0 0 256 256"><path d="M128,128a8,8,0,0,1-3,6.25l-40,32a8,8,0,1,1-10-12.5L107.19,128,75,102.25a8,8,0,1,1,10-12.5l40,32A8,8,0,0,1,128,128Zm48,24H136a8,8,0,0,0,0,16h40a8,8,0,0,0,0-16Zm56-96V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"></path></svg>      </button>
+    </a>
+  </div>
+  <div class="theme-picker">
+    Theme:
+    <select id="themeSelect">
+      <option value="material-darker">VS-like Dark</option>
+      <option value="material">Material</option>
+      <option value="monokai">Monokai</option>
+      <option value="neo">Neo (light)</option>
+    </select>
+  </div>
+</header>
+<main>
+  <section class="left-pane">
+    <div class="tabs">
+  <button class="tab-btn active" data-tab="codeTab">Code</button>
+  <button class="tab-btn" data-tab="assetsTab">Assets</button>
+</div>
+    <div id="codeTab" class="tab-content active">
+    <div class="editor-wrapper">
+      <textarea id="editor">resize_stage(640,360)
+
+print("Hello world")
+
+
+def loop():
+    clear_stage()
+    
+    render_text("Hello world", stage_width / 2, stage_height / 2, "center", 30, "Roboto", "#000000", "0px 2px 4px #00000000")
+
+await forever(loop)</textarea>
+    </div>
+    </div>
+
+  <div id="assetsTab" class="tab-content">
+  <div class="assets-panel">
+    <button id="addAssetBtn" class="icon-btn asset-upload-btn" title="Upload Image">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#e5e7eb" viewBox="0 0 256 256">
+    <path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0ZM93.66,77.66,120,51.31V144a8,8,0,0,0,16,0V51.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,77.66Z"/>
+  </svg>
+</button>
+    <div id="assetList"></div>
+  </div>
+</div>
+  </section>
+  <section class="right-pane" id="rightPane">
+    <div class="controls">
+      <button id="runBtn" disabled>Run</button>
+      <button id="stopBtn">Stop</button>
+      <button id="fullscreenBtn">Fullscreen</button>
+      <span id="statusText">Loading Python…</span>
+      <span id="mousePos"> 0,0</span>
+    </div>
+    <div id="stage" class="stage" tabindex="0"><div id="stageLoading" class="stage-loading">Loading . . .</div></div>
+    <div class="console">
+      <div class="console-title">Console
+      </div>
+      <div id="consoleOutput">(no output yet)</div>
+      <button id="scrollToBottom">↓ Back to bottom</button>
+    </div>
+  </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>
