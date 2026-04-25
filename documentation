@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link id="favicon" rel="icon">
+<meta charset="UTF-8">
+<title>PyNugget Documentation</title>
+
+<style>
+/* --- Base Styles (from your editor page) --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: dark; scroll-behavior: smooth; }
+
+body {
+  background: #111827;
+  color: #e5e7eb;
+  font-family: system-ui, sans-serif;
+  height: 100vh;
+  display: flex;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 260px;
+  background: #020617;
+  border-right: 1px solid #1f2937;
+  padding: 1.5rem;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #3b82f6;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0.5rem 0;
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.sidebar a:hover {
+  color: #3b82f6;
+}
+
+/* --- Main Content --- */
+.content {
+  flex: 1;
+  padding: 2.5rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;   /* ← ADD THIS */
+}
+
+.content h1 {
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+}
+
+.content section {
+  margin-bottom: 3rem;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #3b82f6;
+}
+
+
+
+.content p {
+  font-size: 1.1rem;
+  color: #d1d5db;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+/* --- Home Button (matches your button style) --- */
+.home-btn {
+  background: #111827;
+  border: 1px solid #4b5563;
+  color: #e5e7eb;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.home-btn:hover {
+  background: #1f2937;
+  border-color: #3b82f6;
+}
+
+
+
+
+
+
+
+    
+
+
+
+.sidebar a.nav-h3 {
+  font-size: 0.85rem;
+  padding-left: 1.2rem;
+  color: #6b7280;
+}
+
+
+.sidebar a.nav-h2 {
+  font-weight: 500;
+}
+
+
+.sidebar a.nav-h3:hover {
+  color: #3b82f6;
+}
+
+h3 {
+  scroll-margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+pre {
+  gap: 12px;
+  padding-left: 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+
+    
+pre::before:hover {
+  background-color: #374151;
+  cursor: pointer;
+}
+pre::before {
+  transition: background-color 0.15s ease;
+}
+
+
+pre code {
+  display: block;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  color: #e5e7eb;
+  font-family: monospace;
+  font-size: 0.9rem;
+
+  white-space: pre;
+}
+
+
+    
+
+code {
+  background: #1e293b;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.sidebar a.active {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+
+
+pre::before {
+  content: "";
+
+  width: 28px;
+  height: 28px;
+
+  display: block;
+  flex-shrink: 0;
+
+  background: #0f172a;
+  border: 1px solid #374151;
+  border-radius: 6px;
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><path fill='%23e5e7eb' d='M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z'></path></svg>");
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
+  cursor: pointer;
+  
+}
+
+    
+pre::before {
+  transition: background-color 0.15s ease, background-image 0.15s ease;
+}
+    
+pre.copied::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><path fill='%2322c55e' d='M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-64-64a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z'/></svg>");
+  background-color: #1f2937;
+}
+
+
+
+    
+
+    
+
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar (auto-filled by JS) -->
+<nav class="sidebar">
+  <a href="https://python.w8.quuq.dev/" class="home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#f7f7f7" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"></path></svg>
+  </a>
+  <h2>Documentation</h2>
+  <div id="sidebar-links"></div>
+</nav>
+
+<!-- Main Content -->
+<div class="content">
+
+  
+  <h1>PyNugget Documentation</h1>
+
+  <!-- Editable Sections -->
+
+
+
+  <section id="changes">
+    <br><br><h2>Version 2.1</h2><br>
+    <p>
+        <h3>Assets</h3><br>
+        We've added a major change: Asset support! Projects can now play sounds and render images which are stored in the Assets tab.
+        <br><br><h3>Project information</h3><br>
+        Projects now internally store their new version; you may notice projects now have a 2 under the version key in their json data.
+    </p>
+  </section>
+
+
+    
+  <section id="intro">
+    <br><br><h2>Introduction</h2>
+    <p>
+      Welcome to the PyNugget documentation. Pynugget was designed by <a href="https://marschompsvenus.itch.io/" target="_blank">MarsChompsVenus</a> to be a bridge between scratch and other coding languages. 
+    <br><br>It features a scratch-like stage, allowing users to feel at home and create projects with ease.
+    </p>
+  </section>
+
+  <section id="projects">
+      
+    <br><br><h2>Creating Projects</h2>
+    <p>
+      Starting a new project is simple. Click “Start New Project” on the home page, or go to  <a href="/editor" target="_blank">https://python.w8.quuq.dev/editor</a> to go to the editor. 
+        <br><br> Make sure to save your project consistently!
+    </p>
+  </section>
+
+  <section id="editor">
+    <br><br><h2>Using the Editor</h2>
+    <p>
+      Pynugget is built off of python, and uses pyodide to run it in the browser. <br><br>
+      Because of this, not all libraries are supported. More common ones such as math and random will work, but others will not. <a href="mailto:marschompsvenus@mailinator.com" target="_blank">Contact us</a>  to request further support!
+    </p>
+  </section>
+
+
+
+
+    
+  <section id="saving">
+    <br><br><h2>Project saving</h2>
+    <p>
+      Projects can be saved in two ways at the moment; <br>One is obviously inferior.<br><br>
+      <br><br><h3>Share links</h3><br>
+      This is the inferior (but more easily shareable) method. <br>
+      You can click the button with a link on it to copy a share link to your project. <br><br>
+      WARNING: Share links do not store assets, so they must be stored elsewhere for these projects to work. Or you could go full-Ascii.
+
+      <br><br><br><h3>Pynugget files</h3><br>
+      This method is much more desirable for development purposes.<br>
+      You can click the download button - or use Ctrl/⌘ + S - to save the current project as a .pynugget file.<br><br>
+      Pynugget files are effectively renamed json files - and their contents can be edited externally. This is not reccomended as it may break syntax.
+
+      
+    </p>
+
+    <br><br><h3>Auto Version Incrementation</h3><br>
+      Anyone who codes on a regular basis may know how annoying it can be to increase version numbers, especially if you do it often.<br><br>
+      This is why, if you have a number at the end of your project name, pynugget will ask you if you'd like to increment the number by 1. 
+  </section>
+
+
+
+
+
+    
+  <section id="SYNTAX">
+    <br><br><h2>Syntax</h2>
+    <p>
+        <br><h3>Indentation</h3><br>
+        Pynugget is currently still a hobby project and is thus a bit buggy. One main bug is that of indentation.<br><br>
+        In many codebases, you can use the tab button to indent, as well as four space. <br><br>
+        In Pynugget, however, you must use one or the other. That is, you cannot use both tabs and spaces in the same python file, or you will recieve a lovely compiler error.<br><br>
+        We are actively looking into this issue, but for the moment, we reccomend using just spaces, as they are automatically generated when a new line is created.
+        <br><br>
+        <h3>Time</h3><br>
+        The time library is VERY buggy. We do not reccomend using this library as it is prone to causing many crashes. <br><br>In development we attempted to work around it and provide functionality by compiling many common functions into other ways accomplishing their mission; "sleeping" for example would be a different type of waiting function in the JS. <br><br> We were not successful.
+    </p>
+  </section>
+
+
+  <section id="assets">
+    <br><br><h2>[New!] Assets</h2>
+    <p>
+      Recently, we've added Asset Support to Pynugget. Assets can be uploaded through the new Assets tab.
+      <br><br>Currently, only the following filetypes are permitted:
+      <br><br><pre><code>svg
+png
+mp3</code></pre>
+    </p>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  <section id="Functions">
+    <br><br><h2>Custom Functions & Rendering</h2>
+    <p>
+        Pynugget does not support the pygame library, and so we have created several custom functions to allow programs to render on the screen and interact with users. <br><br>
+        The custom functions can be found below:
+
+
+
+        <br><br><br><h3>Clearing the stage</h3><br>
+        The most important function concerned with rendering . . . would arguably be the function to clear the stage. <br><br> It's simply:
+        <br><br><pre><code>clear_stage()</code></pre><br>
+        <a href="https://tinyurl.com/ShortProject1" target="_blank">Example Project</a><br><br>
+      
+        
+        <br><br><br><h3>Rendering Text</h3><br>
+        You can render text with the function:
+        <br><br><pre><code>render_text("example text", xpos, ypos, centering style: (left, right, or center), scale, "font", color (in hex code), shadow_settings)</code></pre><br><br>
+        Here is a more realistic example:
+        <br><br><pre><code>render_text("Hello world \n\nPress space!", stage_width / 2, stage_height / 2, "center", 30, "Roboto", "#000000", "0px 2px 4px #000000")</code></pre><br>
+        <a href="https://tinyurl.com/ShortProject1" target="_blank">Example Project</a><br><br>
+
+
+      
+      
+        <br><br><br><h3>Forever Loops</h3><br>
+        Another important thing is a forever loop. <br>You can create a forever loop with
+        <br><br><pre><code>def loop():
+    #code#
+await forever(loop)</code></pre><br><br>
+        Just make sure you define any functions before you run 
+        <br><br><pre><code>await forever(loop)</code></pre><br>
+        to initialize the loop. <br>
+        <a href="https://tinyurl.com/ShortProject1" target="_blank">Example Project</a><br><br>
+
+
+        <br><br><br><h3>Rendering Images</h3><br>
+        You can render images with Pynugget through either a link or the <a href="#assets">Assets Tab</a>. For projects using mainly share links, a service such as <a href="https://cubeupload.com/" target="_blank">Cubeupload</a> may be useful. 
+        <br><br>You can render images like this:
+        <br><br><pre><code>render_image(name/url,stage_width/2,stage_height/2,20,20,1)</code></pre><br>
+        Either a link or the exact name of an asset can be used.
+        <br><a href="https://tinyurl.com/ShortProject2" target="_blank">Example Project</a><br><br>
+
+
+
+      
+        <br><br><br><h3>Stage resizing</h3><br>
+        You can resize the stage to effectively any custom size with
+        <br><br><pre><code>resize_stage(x,y)</code></pre><br><br>
+
+
+
+      
+        <br><br><br><h3>Custom Cursors</h3><br>
+        Use the function
+        <br><br><pre><code>cursor("drag")</code></pre><br><br>
+        to set the mouse cursor.
+
+        Here is a list of all valid custom mice:
+        <br><br><pre><code>auto
+default
+none
+pointer
+wait
+text
+move
+crosshair
+grab
+grabbing
+not-allowed
+help
+zoom-in
+zoom-out
+cell
+context-menu
+alias
+copy
+no-drop
+vertical-text
+all-scroll</code></pre><br><br>
+
+
+
+        <br><br><br><h3>Playing Sounds</h3><br>
+        You can play sounds with Pynugget through either a link or the <a href="#assets">Assets Tab</a>. For projects using mainly share links, a service such as <a href="https://catbox.moe/" target="_blank">catbox.moe</a> may be useful.<br>
+        <br>You can play sounds with
+        <br><br><pre><code>play_sound(name/url, volume=1.0)</code></pre><br><br>
+        The first field is the source of the sound it can be either the exact name in the assets tab, or a url.<br>
+        <br>The second field is the volume. It's not neccessary, but can be used to set the volume of the sound being played from 0-1.
+
+
+
+        <br><br><br><h3>Detecting key presses</h3><br>
+        You can detect keypresses on and individual level with
+        <br><br><pre><code>KeyPressed("k")</code></pre><br><br>
+        "k" can of course be replaced with any string. See the custom variable "key_down" for more.
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  <section id="Variables">
+    <br><br><h2>Custom Variables</h2>
+    <p>
+        Pynugget also supports several custom variables to read data about the enviroment.
+
+
+
+        <br><br><br><h3>Stage Size</h3><br>
+        You can read the stage width and stage height with the variables
+        <br><br><pre><code>stage_width
+stage_height</code></pre><br>
+
+        Note; the stage coordinates start at 0,0 in the top left corner, and the bottom right will be at the coordinates "stage_width, stage_height"
+
+
+
+      
+        <br><br><br><h3>Reading the mouse</h3><br>
+        You can read data about the mouse with
+        <br><br><pre><code>mouse_x
+mouse_y
+mouse_down</code></pre><br><br>
+        Here is a more realistic example:
+        <br><br><pre><code>render_text("Hello world \n\nPress space!", stage_width / 2, stage_height / 2, "center", 30, "Roboto", "#000000", "0px 2px 4px #000000")</code></pre><br>
+        <a href="https://tinyurl.com/ShortProject1" target="_blank">Example Project</a><br><br>
+
+
+
+      
+        <br><br><br><h3>Last Key Pressed</h3><br>
+        You can use
+        <br><br><pre><code>key_down</code></pre><br><br>
+        To detect the last key that was pressed. This can be useful for creating typing - or for debugging or finding out the name of the key you want to detect.
+
+    
+  </section>
+
+
+
+
+
+  <section id="Examples">
+    <br><br><h2>Example Projects</h2>
+    <p>
+      Considering pynugget is a hobby project, several projects have been built with it. Here are some below.<br><br>
+        <a href="https://python.w8.quuq.dev/editor#code=E4UwzglgXiD6YBcCGBzEAKAbAFgAwBoACAZk1wEoAoCAWwAcB7YBQmpBAC0soBkBGIjwBMg4oQC8hABwFpsmdyR8JrdhwB0dCIQD0hIZSRCVbTpu17jAakK51Uw2MmmNW3fsIBaW+szcAbsqS-sbBTraUKCp2AKzcCMBIEAA2AoQJScki6Ykp4QDaALpERSWFlAAmiSgoEAB2UZKeyoQAxF5BhHUMdSBEuDp8OqGEAO4cEADGHKpgYNyVIABmhFVIo7DJ9RgAHmkAnmk72fvZ00jA5ABclIR3hIggdGAq9QjobDvoSABGYOjHLyEPbkIi-f6nIGHcjkdyYKj3QhLJiEbT1QiJBoYR7PQg2PjXW6I+4sSQWB4IJ4vCArHEvAB8tkIIGSYBAEWJ9x2Kj2eMIAOM3hBhAAVOkiZz9ipDnz0JDvNDReLOXdQHUKiBgLBKTt3udgEQdkR9kQAESTEB1SnAU1EPjZU00HoMMB0JAW22EU2tKS+01UbgalYVCCIAEHI4nISExGgBAAV2AdX54aBx3IIpF1n5MoV0cz+ZFsQWQcIyQYDDo6Bj9xQ5Z+SGShCUYOySGIRECney-g7q2qtQaEsIdYYDabGRSaUnWSIM+I3ERk2SIAu8GQaGrw4YRsIDClkkQqDgowgFU47myZEX93annvhEYkAQEB6L3vnmHvMkO75-CVLjqJAdTfASw4yj+Uo2P+YqAZMLqgQiXIjLy0HGLBahAfU3zRuBIwymhAGYfB-xGEhdw7OEgLQWIGFmMB3zEORhD7OEkI0URZgkYxAaIneD5rDU9RRAAZIQkyJmAKIfsOEnAFJWoIPsdDspIppIPGCAMKaw40qwDDxmysAVAwox1DcKqosGA7CRITR8BZln3BUKj5CGYZOoZcC7p5RkmsCEagsOTmIu57y+d5RARbA-nHMa0b4MFIV3GFHwGUZPnpXAsV9qx5DlMlrAmNhFTMZZek0IQAA8JC4I5hUpTZDQqBU6j1BqXw0GV9x6YJg5RAAhPZ9VOXJCnaspqleigiQ-D8wk6YV7QANbbKYUz9qg-VJZyvVNY0kh1TtTlKCYmHsEgdRCGlXmwNy3g7lFWUxUC+7dSFgTRMdiIsntW22eIkgOd9KpGGdZgXVdN0ZWmaTRVKCpgQ19whF9hW-dZ-3NYD+gjYV7bgxokPXdF93Atk8NQrhyN3L2aP3CybJ485+0qM0N53O0ekcAw-iarZvOas2j4MG8zbql0DAsH1wlEGAPOjCOs26ZjQnY8Nx1hS8khuaG4XPZlt2xYFiU0ylevQ5F+lG4aUZBWbqwW6TT028CuVMQVKoVSVetgLCNXEEdhVjUwE0qSopozb8OmyZJTDoCHimTbxt5eA+dAcPskCTC8bpeeJHAgJMy1p5+iJ6d0LAANIgPsAAKoBzCAFToKaQj+uLLky+rHTM3cSiwO6kwqOgnhRHo-CwnRGgMUosI2HYuC4Oh-Jg94c-HUYg+TMPkij+PhDCFPqj0dhZF8ovy9KqBQLnwv6hLyvjG39ToPENvu-8mP7g8ExnEz2fP+99H7XzXs2JiHNiSfSsJIAeQ9jqoxgc2IQH8EFiCQe2VBmskD0ABj4AAnIQhBygRSSAqDgrQQ5LKo1IasChwk0GijIfQocm9lBIMCJvawwQDCWQJhwhcw5+LeHjHQchlIRbPlfHUF4SAljWkfJnbO757xfk6L+aCJCT4AJAhvREEE9xQUPlouCCE9HIR5Oww+K9AKz1fncSEkgCLWP-uobiZEvxUWzL-Vxs8IH6LYt42i2i3FmIgUI0uORMgqLLiSXIqR1BIDoCpdU6BwzGgJMxGcQhEnJMtC3AU8UYTDnnLklJBTKLGiYsxPSK4QIzgJIQRkfAYh1SiVOTQlZ0AUBVmWS06Bsmwmaa0q47SsidKrD08uKw6kDPiX-YZbTSmMEmSnTmGJwAgBYDOeY0zCA13ro3NkLdTR8H9H3MZfA3ErguFuSy2TrmrmAHclUpTlxPK3BEtYisdnDmRMAdIqJkwNNGWqDUikQC6lbuoT0CB8i4GKOkfIfBEXmktNaT0fBZCOmdK6d0IBPSmlABUf0fyUQsHRNk0F+TNTakhe8U0MK5zwsRXClFZoLRWk1Ji7FTpuh4o9GaGaIBLSksRP8wFlL5nUvVLSnUDKmVIoRcy9lXpOUYrtLy3FbpBVqv2JdUlXzEiK2AAwCouyWbrE2NsdAj1DGGgjGaGFzFvnWt6OklikZ4pOrFZajYWx3VxRYtkSpLE+yMsNXxTais2BNwtaqGlEKoWmkAPOkno9gZI5ei7lRAhBav5TqglZpiW+oTbKpNDK02229Wq7NNpc35pdIWwlwrRXMTBXK+lrcq1uyqVmrl9b9CNoFUWvVBqAzrCSCwf5IA+bPPLJWcgQA" target="_blank">Triple Pendulum</a>
+        <br><a href="https://python.w8.quuq.dev/editor#code=JYWwDg9gTgLgBFAhgOwCYRAKG5gxHAYQmQGcYTMoBTE4ALyoH0zEBzKgCgBYAOABgA0AZgBsfAJSYAxlWQwqUOAF44LdowDuwVDAAWcAPRwATANUw2TXVWCtd8I8cxgSyuAEYArDhz4AksjAMJgkyIgA1lRuAN4AvpgAZlAArkGuKnE+eHAAaohQFEmIIFEqfCFhkYyowIoq7iFS0KVw5dkAypVRAEYQqACecFLUiDDAxFm+cAAyEBBg2KhUCXAANnNgHOIAXJhw+0OrVPnMFuxbewes692Iq3BFJZf71xC396ERTDVQz3Cv71UTWof0eUQA1PU-n9gCswcp6rsDsiHtA4MB0cgEChzlwdn8UQcAHJUDTtKisEpyC6E-YkjQAMRSQRptIJB3Z+05cGhyL++AASrIllBgMhWH9qGgFIxQJYOAAiewwFzbAwGZIAOikyW6VGSYHWiFQ2owBgAGowhAB2AydL4AIQg+VQxk1YHFCoEMjkCgA2nwALre2TyKB+9zB62CEQATk1PAE7kkvIO+CZqXgS3kUjGE2RCTRKzFa2AZA4SUzJHxtIQwplYGAAA8qKsK8zyH6EoGA8GHh2SF2e5GzC4zArcAkEnwZ3wFZJa4XFK4S59IkjawdYXAOIhuiQOGuqH6SD2g3AALT9qtD3viOAAHjgLkMJnvKFQO73B6PJ+Hgcva80lvSN7yfF9HBrTdCXpDMWQXaCUXpclKVDVlEIOStgO7Xs3AvdxZ25WsSGBCEoQw5FDUQfpmAgZI0EVZVVXVBJgCOEhtVGXom01EAICoAw6GtfoEl0EBeLAIR5yI2luhGcIZMJbACzRFcsSPDdCSlEVGEbFs21-U9ezMQz-1HEhx1wIQeH4LhPGkvlHI5JyuRcnlkW0htm1bRh5CbGBDxgKBD1I8QQ19cMgzMTxBAnWdZy9PhNSEAQFR9MMHOcrLXOy9zcr+EgwCoKhP3qcpkW3ABpKh+gABWoEgSBKxU4HnTSUUK4rSrgbw3O3eEAFJVCKkqEVadqVOXYxMVLcsj01SJ+gPcQoOg9I1lkQ8unvK8SGmq8Ggw7dXAAPnGxSOq6P83EM-Ce22QMLtbJqJsQi6KpWaq6oaprUEVDQ2ve2kj2qWo3CEIH9iqmr6poX7FRIQGKOBrpQbqOBrUhvLkeh764eahVUCR5HLq+NG3EOkmPrgL7YcagmAdWqnSaqH44EhDwsep2mfoJxGmeZg4QbZlQeCx3G6fhhVEGJwXhbBlResF9FPph3m-oVRnXrl1G2YvcjlYl9WEdl5X9nlxQOcp5GuY5LHxZWC2xvcbWKNM3COZcB3VF1hWVGMV2MPd89PYoM33cjS8VC9qnjt9uoVCEQPEIjgD9efMOSbjsmRZULhk7Wq6jMj9OY+V4O0+jzPBe9p2lEVgvNwrqOM9r+OxpERviKLs9K9b8Oe4jADQ7bnO-YxruUa+P8h-ZqvR9Z8eeEnwlU7n-vy8HkP57N7ltz45ImuqCANGQRvkIpKkAoQnLb5RZTMNUmaNL3x2t4As61CYLQdF0Rvm7KK-H208jLnifHwf+78bpnG-toPQgEy7QSAWvT+MDGDWFsPYBBJBIEgP-G4cqtJs6RBnpHcBuCSHFwAioL+6CbB2HgFeL2kxsgMnormcYYR7glD0H0CgSwVhQDomgGAEAOBQHcAIURTNqAwGSFALEQj6J-Qka+aRcAABUcBRGLGWHWaUUBdLeTbE2AQ-QBC0AYN6CA6woAyPrIYvyAUFSAALSL0CBhE6DEaYyxVB7zglUPQKIjgzBKJEWI8xvj-GBIYK+Lg450oKHcb4zRJhkrjgFG8CAoj3FNFseOPgYAmwmCKXALgpTcDxXitJaEAj9E6T0j5JxHAnFmFMXAcxQwbHQBMlIO4VAlCSLgHcWwyAlAKiOAkGAXpSB9KOEoCQ7VGmrGYHMloiDWoKgVH8IUBjXBOLgIfMUrBnzGNcBwJopAyzyDkHALQ8D+h0UUN0dYUhwjVk1KmfYtV8jFCoGGHBfwrxOO2OYUU4ptEQDgDUQqqxqJArgO0-ooLIC0DzFiDgepdCIAAG7jEUEsIqaBXDEGGasUZN9AJ5OgKC6wxTqW-GRLtNZoKUkgGSKsMYhpgAKB3O4NwyBoAgDuGYaaKhui2DMP8qQmpKVXhGawM+rVJnTISaGJJZg0QKlFAw7ZyItl6q3CsQV8AQXclkfI5AXy4D4E8E2a0pz9KoluYeP5wzXB6iXFQMw3RkjwEiGAeAUgjgoEpYWW5GRuQAHIACCUbQV+gDEmZNkiooRgEIITNSZgzpqzYIEc6bJFFuzQIXNGby0FtTeW-NOaq1ZsjMGaNDp41wETcW4taa60VtrdW7tpb23Js7b2mt-bh0lsLSmjNgZG21ijQQFtib82TsrWOodeap2jvXWu4dPat05qXe26dAho0ABEF0To7bu3tK7103uvVe+tD6+0XsHUe6NABRc9A6i1Pszb+jdL7U3-u3Xmnt3632zoZF+5d46u1-s3Tu0dA6QPVuA2hmdtIo0AHFz0HpTWhhDoGEOHsI8+uD468M-ow4SKNAAJaDt7-13sfUh5dTH2OkZrdRlEUa-DQfA6W+tqHBMVuE0mpd8HxODoA0JyT37s3ceRFGgAUrhsdBat0UfU-u7TnHYO6aTchiDmHKoMfvaRoDxGxMdus6JuT16APkYbce2d0wzNEbLR58jKH7N7r00O8DimDhRoALLubI9Jn9VmR2eYi4xvTzHu1Bf2FGok4WYs2Yy3Z-TQnEtZfi7FrjLnMMAHk1NGYSxxwrOXzPVY0zBoMyW4BRtqvxydPmasscA451dBHquNeKzRgAiuV9rVWnPjey4lyzhnIvGZowKNrl7Ksre69uutT6ZsTaa1G9oo2SP9b65RmTBnNMrqMztgAKkt-DImJMnfu2m2TD3pNPey29x782eMAFV0udbi7Vibq2gezcvTtnIf28v-fy4D07kWXsbZ2wAdUh5NgrVaMdXsx6xg97GdvmlR6t+7M3ntvYxz19H2mdsAE1Cd1Z0+Tj7r2dOfbu8ztniPBs8YAFo3ai1Jrrt6EdicexTxD3XnPRr4Pt19wOHN3uxxOrrIPjsDeje4NTrPQci-eyz9nUmNsc51xdrnSnjAy623DgruWTtwb6-JyXs6hAW7F4LuHFWBcA7dyb6NXBNd2b18t2bEnNs9YE57knDm1ezs8Hz6HYexts7d5T63DWvtKZEC7jr2eGeJ-p0TtPO3rRx-q6n2Tgfjfi+8+h03wWeBZ7R7V1XjfvdjZ27GBvcvU-h7O3r1vYPa8peawmz3knNNM48+PvvOu-Oj6nTtgAhP7w3BuZ-69JxXsfvWjd-p2wAfk7-nufpe88b6T2vzn0bNT+8n9vufE+1+361xvnb2wb8X4-1v2fZ-V9f53TtgAHWQBbSJGICoD+HiDcikGxUMR-ngUVj+GgJOAwQYTcExmREKkQCkGOTcCcDcnwHaG5XgDFFEVLGQBoFREUHZU5WAAvHJXINUANEgFgD+HoIoJUCcU1CYIUC2E1FhRZCjSAKjUpVYLFCsHoSwRUAuRgLoUwXgACWTFSRIn6VSWWVWX6WtSXDIKYG0HaTYJmlkGSBKCQHkA4DYOrFdm3BNW0Mbh1CgClBgEYEGBUEGACTYNlFQGKS0XcJQPsAukuTGGQGSHAIwm5HwAIDuB1DhXkEhQsHuDgP0AgBWD0DLG0O5FETiM0DgX0BUCOGQDMLEPvC0WkJOASPZmGiwOOSKKBBUK0TUOUKOEAkwOwIhS0QaKiDqOMXUKOG5DCLgBPX+QUBADEPMHyECJOWKVuF+jgFJQVWQCviATmLGjSnVSgAVH-gsFgEYGKRUGKWBWyTuCyN-kMEcG5FbG3CWPrlah1XsHWIuhYC2J2MRUAgyMOISLONWBen2HwBVXuM2McKeKbF6NrDsIcO2OgTGO2O5FBNDCcLcFcO0I8K8MRN8OCFrG5C0KQMUBLDYMbm3CxLgGsJLHDRgBXiGHkTBOKQ5hKNgOyPKOaKqKULWVUK6PaKxgCLFGCPtiOjhGIBgD9CxIAlSNAPINBRtUJNJH0LuBGAGDgGxTQCOFQHZL5M5JCJJgujAFGDDCxBUBJIFJgMegwi0KEQ0BmiQHFE4CxNkIYQFkQkxJsTNJxEtJkISNtJxhWE1JgG1L9BNJ7DyUDDJNrE8kMWWQ4FtmghhLkHBICTySZNqMdR8naMHzNnJPsNhIRJNLjMaM6P0m6O9XDM3HqOZLaOZICVmX6WTLNgZQLOREpRTNynrLvhBIpNhKpKkKtLKICQZPFGqPaJZNzLZL5GtWHLchHPylHInPHKnLvjHJnL5HwBKz0F5R4V0D4V0RWAvlQmpCZm3DyK2i+HvDOggW5F-D3KPHEGoVbV-CDGMmvP-ENIOGeioFdlPM2nPMvIFNWOMkSXDAbXXLgFgg7C2Haiwk7D3NAurA-PNPQHEmgpII4DHFoTKKYWrFCQ-AwE1DgupEQrQVROwQvNnOxiIo6H+LWA2GwEQA0EQCCEoKoBxR4PWHmBEMnLnOnOIqHJYvYrYsIp4s4sIqAA" target="_blank">Snake</a>
+
+    </p>
+  </section>
+
+
+
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script>
+/* --- Auto-generate sidebar from <section><h2> --- */
+const sidebar = document.getElementById("sidebar-links");
+const sections = document.querySelectorAll("section");
+
+sections.forEach(sec => {
+  const sectionId = sec.id;
+
+  // --- Handle H2 (main section) ---
+  const h2 = sec.querySelector("h2");
+  if (h2) {
+    const link = document.createElement("a");
+    link.href = "#" + sectionId;
+    link.textContent = h2.textContent;
+    link.classList.add("nav-h2");
+    sidebar.appendChild(link);
+  }
+
+  // --- Handle H3 (subsections) ---
+  const h3s = sec.querySelectorAll("h3");
+
+  h3s.forEach((h3, index) => {
+    // give each h3 an ID if it doesn't have one
+    if (!h3.id) {
+      h3.id = sectionId + "-sub-" + index;
+    }
+
+    const subLink = document.createElement("a");
+    subLink.href = "#" + h3.id;
+    subLink.textContent = h3.textContent;
+    subLink.classList.add("nav-h3");
+
+    sidebar.appendChild(subLink);
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// highlight current section in sidebar
+const content = document.querySelector(".content");
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".sidebar a[href^='#']");
+
+function updateActiveLink() {
+  let currentId = null;
+
+  sections.forEach(sec => {
+  const rect = sec.getBoundingClientRect();
+
+  if (rect.top <= 120 && rect.bottom >= 120) {
+    currentId = sec.id;
+  }
+  });
+
+  if (!currentId) return;
+
+  navLinks.forEach(link => {
+    const match = link.getAttribute("href") === "#" + currentId;
+    link.classList.toggle("active", match);
+  });
+}
+
+// listen to scroll on the content area
+content.addEventListener("scroll", updateActiveLink);
+// run once on load
+updateActiveLink();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll("pre").forEach(pre => {
+  pre.addEventListener("click", async (e) => {
+
+    // icon area bounds (top-left square where ::before sits)
+    const rect = pre.getBoundingClientRect();
+
+    const iconSize = 36; // adjust if needed (matches your 28px + padding)
+    
+    const clickedIcon =
+      e.clientX - rect.left <= iconSize &&
+      e.clientY - rect.top <= iconSize;
+
+    if (!clickedIcon) return;
+
+    const code = pre.querySelector("code")?.innerText || "";
+
+    try {
+      await navigator.clipboard.writeText(code);
+
+      pre.classList.add("copied");
+
+      setTimeout(() => {
+        pre.classList.remove("copied");
+      }, 3000);
+
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  });
+});
+</script>
+
+
+
+
+<script>
+  const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function createFavicon(svg) {
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/svg+xml';
+    link.href = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+
+    // Remove old favicons
+    document.querySelectorAll("link[rel='icon']").forEach(el => el.remove());
+
+    // Add new one
+    document.head.appendChild(link);
+  }
+
+  const lightIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <path fill="#1e1a1a" d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"/>
+    </svg>`;
+
+  const darkIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <path fill="#f0f0f0" d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"/>
+    </svg>`;
+
+  function updateFavicon(e) {
+    createFavicon(e.matches ? darkIcon : lightIcon);
+  }
+
+  // Initial set
+  updateFavicon(darkModeQuery);
+
+  // Listen for changes
+  darkModeQuery.addEventListener('change', updateFavicon);
+</script>
+    
+    
+
+
+
+    
+</body>
+</html>
