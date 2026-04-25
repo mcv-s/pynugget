@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link id="favicon" rel="icon">
+<meta charset="UTF-8">
+<title>PyNugget Nuggets</title>
+
+<style>
+/* --- Base Styles (from your editor page) --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: dark; scroll-behavior: smooth; }
+
+body {
+  background: #111827;
+  color: #e5e7eb;
+  font-family: system-ui, sans-serif;
+  height: 100vh;
+  display: flex;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 260px;
+  background: #020617;
+  border-right: 1px solid #1f2937;
+  padding: 1.5rem;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #3b82f6;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0.5rem 0;
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.sidebar a:hover {
+  color: #3b82f6;
+}
+
+/* --- Main Content --- */
+.content {
+  flex: 1;
+  padding: 2.5rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;   /* ← ADD THIS */
+}
+
+.content h1 {
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+}
+
+.content section {
+  margin-bottom: 3rem;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #3b82f6;
+}
+
+
+
+.content p {
+  font-size: 1.1rem;
+  color: #d1d5db;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+/* --- Home Button (matches your button style) --- */
+.home-btn {
+  background: #111827;
+  border: 1px solid #4b5563;
+  color: #e5e7eb;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.home-btn:hover {
+  background: #1f2937;
+  border-color: #3b82f6;
+}
+
+
+
+
+
+
+
+    
+
+
+
+.sidebar a.nav-h3 {
+  font-size: 0.85rem;
+  padding-left: 1.2rem;
+  color: #6b7280;
+}
+
+
+.sidebar a.nav-h2 {
+  font-weight: 500;
+}
+
+
+.sidebar a.nav-h3:hover {
+  color: #3b82f6;
+}
+
+h3 {
+  scroll-margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+pre {
+  gap: 12px;
+  padding-left: 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+
+    
+pre::before:hover {
+  background-color: #374151;
+  cursor: pointer;
+}
+pre::before {
+  transition: background-color 0.15s ease;
+}
+
+
+pre code {
+  display: block;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  color: #e5e7eb;
+  font-family: monospace;
+  font-size: 0.9rem;
+
+  white-space: pre;
+}
+
+
+    
+
+code {
+  background: #1e293b;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.sidebar a.active {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+
+
+pre::before {
+  content: "";
+
+  width: 28px;
+  height: 28px;
+
+  display: block;
+  flex-shrink: 0;
+
+  background: #0f172a;
+  border: 1px solid #374151;
+  border-radius: 6px;
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><path fill='%23e5e7eb' d='M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z'></path></svg>");
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
+  cursor: pointer;
+  
+}
+
+    
+pre::before {
+  transition: background-color 0.15s ease, background-image 0.15s ease;
+}
+    
+pre.copied::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><path fill='%2322c55e' d='M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-64-64a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z'/></svg>");
+  background-color: #1f2937;
+}
+
+
+
+    
+
+    
+
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar (auto-filled by JS) -->
+<nav class="sidebar">
+  <a href="https://python.w8.quuq.dev/" class="home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#f7f7f7" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"></path></svg>
+  </a>
+  <h2>Nuggets</h2>
+  <div id="sidebar-links"></div>
+</nav>
+
+<!-- Main Content -->
+<div class="content">
+
+  
+  <h1>Nuggets</h1>
+
+  <!-- Editable Section -->
+
+    
+  <section id="intro">
+    <br><br><h2>What is a Nugget?</h2><br>
+    <p>
+      In PyNugget, a Nugget is a useful piece of code you may want to re-use. We encourage users to write Nuggets of code which they can use for various scenarios, for example, the one below.
+    </p>
+  </section>
+
+
+
+
+
+    
+  <section id="Nuggets">
+    <br><br><h2>Nuggets</h2>
+    <p>
+        We made some Nuggets; here are all of the ones so far:
+
+
+
+        <br><br><br><h3>Pixel Rendering</h3><br>
+        We like pixel games . . . and so do you. So use this pixel renderer to draw pixels on the screen!
+        <br><br><pre><code>def render_pixel(x,y,size,color):
+    render_text("■", round(x/size)*size + size / 2, round(y/size)*size + size / 4, "center", size * 2.3, "Roboto", color, "0px 2px 4px #00000000")
+</code></pre><br>
+        <br><br>
+
+
+        <br><br><br><h3>Round to X</h3><br>
+        Python doesn't have this without a special library - so make your own.
+        <br><br><pre><code>def roundto(r1,to):
+    return round(r1 / to) * to</code></pre><br>
+        <br><br>
+
+
+      
+      <br><br><br><h3>Ball Math</h3><br>
+        I wrote this a while back for ball bouncing. If it makes sense; cool.
+        <br><br><pre><code>def bounce_x():
+    global bd, bs, bx, by
+    bd = 180 - bd
+    
+    
+def bounce_y():
+    global bd, bs, bx, by
+    bd = -bd
+    
+    
+
+def change_pos():
+    global bd, bs, bx, by
+    r = math.radians(bd)
+    bx += (math.cos(r) * bs)
+    by += (math.sin(r) * bs)</code></pre><br>
+        <br><br>
+
+
+
+      <br><br><br><h3>Buttons</h3><br>
+        Buttons are the fundamental basis of all UX, so we made a basic button for you!
+        <br><br><pre><code>cursor("auto")
+    button_data = [stage_width / 2, 30, 80, 25, "Button_1.svg","Button_Hovered.svg", "Button Text"]
+    #-------------[ Button X ------ Y-width-height- image1 - ---- image hovered ------ Text-----]
+    
+    render_image(button_data[4],button_data[0],button_data[1],100,100,1)
+    if (abs(button_data[0] - mouse_x) < button_data[2]) and (abs(button_data[1] - mouse_y) < button_data[3]):
+        cursor("pointer")
+        render_image(button_data[5],button_data[0],button_data[1],100,100,1)
+        if mouse_down:
+            new_cloud()
+    render_text(button_data[6], button_data[0], button_data[1], "center", 20, "Roboto", "#000000", "0px 2px 4px #00000000")</code></pre><br>
+        <br><br>
+
+
+
+      <br><br><br><h3>Line Rendering</h3><br>
+        Lines can be very useful - just swap out the image source and adjust ic accordingly so the line fits properly.
+        <br><br><pre><code>def render_line(x1,y1,x2,y2,thickness=2):
+    ic = 4
+    mx = (x1 + x2) / 2; my = (y1 + y2) / 2
+    dx = x2 - x1; dy = y2 - y1
+    ar = math.atan2(dy, dx); ad = math.degrees(ar)
+    distance = math.sqrt(dx*dx + dy*dy)
+    render_image("Square808080.png",mx,my,thickness,distance/ic,1,ad+90)</code></pre><br>
+        <br><br>
+      
+
+
+
+
+
+
+      
+      
+  </section>
+
+  <! ---------------- End editable section ---------------- >
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script>
+/* --- Auto-generate sidebar from <section><h2> --- */
+const sidebar = document.getElementById("sidebar-links");
+const sections = document.querySelectorAll("section");
+
+sections.forEach(sec => {
+  const sectionId = sec.id;
+
+  // --- Handle H2 (main section) ---
+  const h2 = sec.querySelector("h2");
+  if (h2) {
+    const link = document.createElement("a");
+    link.href = "#" + sectionId;
+    link.textContent = h2.textContent;
+    link.classList.add("nav-h2");
+    sidebar.appendChild(link);
+  }
+
+  // --- Handle H3 (subsections) ---
+  const h3s = sec.querySelectorAll("h3");
+
+  h3s.forEach((h3, index) => {
+    // give each h3 an ID if it doesn't have one
+    if (!h3.id) {
+      h3.id = sectionId + "-sub-" + index;
+    }
+
+    const subLink = document.createElement("a");
+    subLink.href = "#" + h3.id;
+    subLink.textContent = h3.textContent;
+    subLink.classList.add("nav-h3");
+
+    sidebar.appendChild(subLink);
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// highlight current section in sidebar
+const content = document.querySelector(".content");
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".sidebar a[href^='#']");
+
+function updateActiveLink() {
+  let currentId = null;
+
+  sections.forEach(sec => {
+  const rect = sec.getBoundingClientRect();
+
+  if (rect.top <= 120 && rect.bottom >= 120) {
+    currentId = sec.id;
+  }
+  });
+
+  if (!currentId) return;
+
+  navLinks.forEach(link => {
+    const match = link.getAttribute("href") === "#" + currentId;
+    link.classList.toggle("active", match);
+  });
+}
+
+// listen to scroll on the content area
+content.addEventListener("scroll", updateActiveLink);
+// run once on load
+updateActiveLink();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll("pre").forEach(pre => {
+  pre.addEventListener("click", async (e) => {
+
+    // icon area bounds (top-left square where ::before sits)
+    const rect = pre.getBoundingClientRect();
+
+    const iconSize = 36; // adjust if needed (matches your 28px + padding)
+    
+    const clickedIcon =
+      e.clientX - rect.left <= iconSize &&
+      e.clientY - rect.top <= iconSize;
+
+    if (!clickedIcon) return;
+
+    const code = pre.querySelector("code")?.innerText || "";
+
+    try {
+      await navigator.clipboard.writeText(code);
+
+      pre.classList.add("copied");
+
+      setTimeout(() => {
+        pre.classList.remove("copied");
+      }, 3000);
+
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function createFavicon(svg) {
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/svg+xml';
+    link.href = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+
+    // Remove old favicons
+    document.querySelectorAll("link[rel='icon']").forEach(el => el.remove());
+
+    // Add new one
+    document.head.appendChild(link);
+  }
+
+  const lightIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <path fill="#1e1a1a" d="M128,128a8,8,0,0,1-3,6.25l-40,32a8,8,0,1,1-10-12.5L107.19,128,75,102.25a8,8,0,1,1,10-12.5l40,32A8,8,0,0,1,128,128Zm48,24H136a8,8,0,0,0,0,16h40a8,8,0,0,0,0-16Zm56-96V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"/>
+    </svg>`;
+
+  const darkIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+      <path fill="#f0f0f0" d="M128,128a8,8,0,0,1-3,6.25l-40,32a8,8,0,1,1-10-12.5L107.19,128,75,102.25a8,8,0,1,1,10-12.5l40,32A8,8,0,0,1,128,128Zm48,24H136a8,8,0,0,0,0,16h40a8,8,0,0,0,0-16Zm56-96V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"/>
+    </svg>`;
+
+  function updateFavicon(e) {
+    createFavicon(e.matches ? darkIcon : lightIcon);
+  }
+
+  // Initial
+  updateFavicon(darkModeQuery);
+
+  // Listen for changes
+  darkModeQuery.addEventListener('change', updateFavicon);
+</script>
+    
+    
+
+
+
+    
+</body>
+</html>
